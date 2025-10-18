@@ -321,7 +321,6 @@
         
         hargaInput.addEventListener('blur', function() {
             if (this.value) {
-                // Bulatkan ke ribuan terdekat untuk UX yang lebih baik
                 const value = Math.round(parseFloat(this.value) / 1000) * 1000;
                 this.value = value;
             }

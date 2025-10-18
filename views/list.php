@@ -425,9 +425,11 @@
             <span>Inventory System</span>
         </div>
         <div class="navbar-menu">
-            <a href="index.php?controller=item&action=form" class="nav-link nav-link-add">
-                <span>➕</span> Tambah Mobil
-            </a>
+            <?php if ($_SESSION['role'] === 'admin'): ?>
+                <a href="index.php?controller=item&action=form" class="nav-link nav-link-add">
+                    <span>➕</span> Tambah Mobil
+                </a>
+            <?php endif; ?>
             <a href="index.php?controller=auth&action=profile" class="nav-link nav-link-profile">
                 <span>👤</span> Profil
             </a>
@@ -463,7 +465,9 @@
                                 <th>Nama Mobil</th>
                                 <th>Harga</th>
                                 <th>Stok</th>
-                                <th>Terjual</th>
+                                <?php if ($_SESSION['role'] === 'admin'): ?>
+                                    <th>Terjual</th>
+                                <?php endif; ?>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -475,9 +479,11 @@
                                         <span class="price">Rp <?= number_format($row['harga'], 0, ',', '.') ?></span>
                                     </td>
                                     <td><?= $row['stok'] ?></td>
-                                    <td>
-                                        <?= $salesData[$row['id']] ?? 0 ?>
-                                    </td>
+                                    <?php if ($_SESSION['role'] === 'admin'): ?>
+                                        <td>
+                                            <?= $salesData[$row['id']] ?? 0 ?>
+                                        </td>
+                                    <?php endif; ?>
                                     <td>
                                         <div class="action-buttons">
                                         <?php if ($_SESSION['role'] === 'admin'): ?>
